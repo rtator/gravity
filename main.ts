@@ -1,5 +1,11 @@
+input.onButtonPressed(Button.A, function () {
+    drawon = true
+})
+input.onButtonPressed(Button.B, function () {
+    drawon = false
+})
+let drawon = false
 let sprite = game.createSprite(2, 2)
-sprite.set(LedSpriteProperty.Blink, 300)
 basic.forever(function () {
     if (input.isGesture(Gesture.TiltLeft)) {
         sprite.change(LedSpriteProperty.X, -1)
@@ -10,7 +16,10 @@ basic.forever(function () {
     } else if (input.isGesture(Gesture.LogoUp)) {
         sprite.change(LedSpriteProperty.Y, 1)
     }
+    basic.pause(100)
 })
 basic.forever(function () {
-    game.createSprite(sprite.get(LedSpriteProperty.X), sprite.get(LedSpriteProperty.Y)).move(0)
+    if (drawon) {
+        game.createSprite(sprite.get(LedSpriteProperty.X), sprite.get(LedSpriteProperty.Y)).move(0)
+    }
 })
